@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婚礼邀请函 | 碧 & 灵</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'ZCOOL KuaiLe', cursive, sans-serif;
+            background-color: #fef7f7;
+            color: #5a4a42;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f5e6d3' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 信封样式 - 更美观大气 */
+        .envelope-container {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            margin: 0 auto;
+            cursor: pointer;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.25));
+            transition: transform 0.3s ease;
+        }
+        
+        .envelope-container:hover {
+            transform: scale(1.03);
+        }
+        
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4af37, #f4e4b5, #d4af37);
+            border-radius: 12px;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .envelope:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4af37, #f4e4b5);
+            clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+            z-index: 2;
+            border-radius: 12px;
+        }
+        
+        .envelope:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #e8cda2;
+            clip-path: polygon(0 100%, 50% 50%, 100% 100%);
+            z-index: 1;
+            border-radius: 12px;
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4af37, #f4e4b5);
+            clip-path: polygon(0 0, 50% 50%, 100% 0);
+            border-radius: 12px;
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 1.2s ease;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e75480, #f8c8dc);
+            border-radius: 50%;
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            animation: gentle-pulse 3s infinite;
+        }
+        
+        @keyframes gentle-pulse {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .envelope-greeting {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 20px;
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 信纸样式 */
+        .letter {
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            background: #fffdf5;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 20px auto;
+            position: relative;
+            background-image: 
+                linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.05) 95%),
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 100% 34px, 10px 100%;
+            font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'ZCOOL KuaiLe', cursive, sans-serif;
+            line-height: 34px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .letter-header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #d4af37;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+        
+        .letter-photo {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f8c8dc, #f4e4b5);
+            border-radius: 10px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e75480;
+            font-size: 18px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .wedding-info {
+            text-align: center;
+            margin: 25px 0;
+            padding: 18px;
+            background: rgba(244, 228, 181, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid #d4af37;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .wedding-info p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #5a4a42;
+            line-height: 1.5;
+        }
+        
+        .letter-content {
+            font-size: 17px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .letter-content p {
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+        
+        .letter-signature {
+            text-align: right;
+            margin-top: 35px;
+            font-size: 19px;
+            color: #d4af37;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: block;
+            width: 220px;
+            margin: 25px auto;
+            padding: 14px 25px;
+            background: linear-gradient(135deg, #e75480, #f8c8dc);
+            color: white;
+            border: none;
+            border-radius: 35px;
+            font-size: 17px;
+            font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'ZCOOL KuaiLe', cursive, sans-serif;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(231, 84, 128, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(231, 84, 128, 0.4);
+        }
+        
+        /* 表单样式 */
+        .form-container {
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            background: #fffdf5;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin: 20px auto;
+            background-image: 
+                linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.05) 95%),
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 100% 34px, 10px 100%;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #d4af37;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 17px;
+            color: #5a4a42;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #e8cda2;
+            border-radius: 10px;
+            font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'ZCOOL KuaiLe', cursive, sans-serif;
+            font-size: 16px;
+            background: #fffdf5;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #e75480;
+            box-shadow: 0 0 0 2px rgba(231, 84, 128, 0.2);
+        }
+        
+        textarea {
+            height: 130px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        
+        .attendance-options {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .attendance-option {
+            padding: 18px;
+            border: 2px solid #e8cda2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fffdf5;
+        }
+        
+        .attendance-option:hover {
+            background: rgba(248, 200, 220, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .attendance-option.selected {
+            background: rgba(248, 200, 220, 0.3);
+            border-color: #e75480;
+            color: #e75480;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 84, 128, 0.2);
+        }
+        
+        .option-text {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+        
+        .option-subtext {
+            font-size: 15px;
+            color: #8a7a72;
+        }
+        
+        /* 感谢页面 */
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 50px 25px;
+        }
+        
+        .thank-you h2 {
+            color: #d4af37;
+            font-size: 30px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        
+        .thank-you p {
+            font-size: 19px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .hearts {
+            font-size: 45px;
+            color: #e75480;
+            margin: 25px 0;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        /* 音乐控制 */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 175, 55, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .envelope-container {
+                width: 280px;
+                height: 190px;
+            }
+            
+            .letter, .form-container {
+                padding: 25px;
+            }
+            
+            .letter-header, .form-title {
+                font-size: 22px;
+            }
+            
+            .letter-content {
+                font-size: 16px;
+            }
+            
+            .btn {
+                width: 200px;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+KuaiLe&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 音乐控制 -->
+    <div class="music-control" id="music-control">♪</div>
+    
+    <div class="container">
+        <!-- 信封页面 -->
+        <div id="envelope-page">
+            <div class="envelope-container">
+                <div class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="seal">囍</div>
+                </div>
+            </div>
+            <p class="envelope-greeting">点击信封开启</p>
+        </div>
+        
+        <!-- 信件页面 -->
+        <div id="letter-page" class="letter">
+            <div class="letter-header">我想把我的喜悦，分享给久未联系的你</div>
+            <div class="letter-photo">新人合照位置</div>
+            
+            <!-- 婚礼信息 -->
+            <div class="wedding-info">
+                <p>💕 婚礼日期：2026年1月23日</p>
+                <p>📍 婚礼地点：湛江市徐闻县</p>
+            </div>
+            
+            <div class="letter-content">
+                <p>我亲爱的朋友，</p>
+                <p>展信佳！</p>
+                <p>突然收到我的消息，是否会有些意外？时光荏苒，我们也许久未联络，但那些共同走过的青春岁月，始终珍藏在我心底。</p>
+                <p>今天，我怀着无比激动的心情，想与你分享一个重要的消息：我即将在2026年1月23日举行婚礼，开启人生的新篇章！</p>
+                <p>我深知大家天各一方，各有忙碌，因此特意准备了这个祝福收集页。</p>
+                <p>无论你是否能亲临现场，我都希望能收到你的祝福——这对我来说，比什么都珍贵。</p>
+                <p>如果你能前来分享这份喜悦，我自然万分欢迎与感谢；如若不便到来，也请完全不必感到为难，不收礼金，只收真心祝福。你的只言片语，就是给我们最好的新婚礼物。</p>
+                <p>为了提前安排场地和酒店，烦请点击以下按钮告知是否能参加。无论结果如何，都感谢你的回应[爱心]</p>
+                <p>衷心期待你的消息，祝愿你一切安好！</p>
+            </div>
+            <div class="letter-signature">
+                你的朋友 —— 碧&灵<br>
+                2025年11月22日
+            </div>
+            <button class="btn" id="to-form-btn">送上我的祝福</button>
+        </div>
+        
+        <!-- 表单页面 -->
+        <div id="form-page" class="form-container">
+            <h2 class="form-title">送上您的祝福</h2>
+            <form id="blessing-form">
+                <div class="form-group">
+                    <label for="signature">请留下您的签名:</label>
+                    <input type="text" id="signature" name="signature" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>选择能否参加:</label>
+                    <div class="attendance-options">
+                        <div class="attendance-option" data-value="能参加，期待见面！">
+                            <div class="option-text">能参加，期待见面！</div>
+                            <div class="option-subtext">我们将在婚礼现场恭候您的到来</div>
+                        </div>
+                        <div class="attendance-option" data-value="很遗憾不能参加，但心意同在">
+                            <div class="option-text">很遗憾不能参加，但心意同在</div>
+                            <div class="option-subtext">感谢您的祝福，我们同样珍视</div>
+                        </div>
+                        <div class="attendance-option" data-value="目前还不确定">
+                            <div class="option-text">目前还不确定</div>
+                            <div class="option-subtext">如有变化，请随时联系我们</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="attendance" name="attendance" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="blessing">书写祝福语:</label>
+                    <textarea id="blessing" name="blessing" placeholder="请写下您对我们的祝福..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">提交祝福</button>
+            </form>
+        </div>
+        
+        <!-- 感谢页面 -->
+        <div id="thank-you-page" class="thank-you">
+            <h2>感谢您的祝福！</h2>
+            <p>您的祝福我们已经收到，这将是我们婚礼最珍贵的礼物。</p>
+            <p>无论您能否亲临现场，您的祝福都将伴随我们开启人生的新篇章。</p>
+            <div class="hearts">❤️</div>
+            <p>再次感谢您！</p>
+            <p>—— 碧 & 灵</p>
+        </div>
+    </div>
+
+    <!-- 音效和音乐 -->
+    <audio id="envelopeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-page-turn-single-1103.mp3"></audio>
+    <audio id="bgMusic" loop src="https://assets.mixkit.co/music/preview/mixkit-happy-day-583.mp3"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取页面元素
+            const envelopePage = document.getElementById('envelope-page');
+            const letterPage = document.getElementById('letter-page');
+            const formPage = document.getElementById('form-page');
+            const thankYouPage = document.getElementById('thank-you-page');
+            const musicControl = document.getElementById('music-control');
+            
+            const envelopeContainer = document.querySelector('.envelope-container');
+            const envelope = document.querySelector('.envelope');
+            const toFormBtn = document.getElementById('to-form-btn');
+            const blessingForm = document.getElementById('blessing-form');
+            const attendanceOptions = document.querySelectorAll('.attendance-option');
+            const attendanceInput = document.getElementById('attendance');
+            
+            // 音效和音乐
+            const envelopeSound = document.getElementById('envelopeSound');
+            const bgMusic = document.getElementById('bgMusic');
+            
+            // 音乐控制
+            let musicPlaying = false;
+            
+            musicControl.addEventListener('click', function() {
+                if (musicPlaying) {
+                    bgMusic.pause();
+                    musicControl.innerHTML = '♪';
+                    musicPlaying = false;
+                } else {
+                    bgMusic.play();
+                    musicControl.innerHTML = '♫';
+                    musicPlaying = true;
+                }
+            });
+            
+            // 点击信封事件
+            envelopeContainer.addEventListener('click', function() {
+                // 播放信封打开音效
+                envelopeSound.play();
+                
+                // 添加信封打开动画
+                envelope.classList.add('open');
+                
+                // 延迟显示信件
+                setTimeout(function() {
+                    envelopePage.style.display = 'none';
+                    letterPage.style.display = 'block';
+                    
+                    // 开始播放背景音乐
+                    bgMusic.volume = 0.3;
+                    bgMusic.play();
+                    musicControl.innerHTML = '♫';
+                    musicPlaying = true;
+                }, 1000);
+            });
+            
+            // 点击进入表单按钮
+            toFormBtn.addEventListener('click', function() {
+                letterPage.style.display = 'none';
+                formPage.style.display = 'block';
+            });
+            
+            // 选择参与选项
+            attendanceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 移除其他选项的选中状态
+                    attendanceOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // 设置当前选项为选中状态
+                    this.classList.add('selected');
+                    
+                    // 更新隐藏输入框的值
+                    attendanceInput.value = this.getAttribute('data-value');
+                });
+            });
+            
+            // 表单提交事件
+            blessingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 简单验证
+                if (!attendanceInput.value) {
+                    alert('请选择您是否能参加');
+                    return;
+                }
+                
+                // 显示感谢页面
+                formPage.style.display = 'none';
+                thankYouPage.style.display = 'block';
+                
+                // 这里可以添加实际提交数据的代码
+                console.log('表单数据:', {
+                    signature: document.getElementById('signature').value,
+                    attendance: attendanceInput.value,
+                    blessing: document.getElementById('blessing').value
+                });
+            });
+        });
+    </script>
+</body>
+</html>
